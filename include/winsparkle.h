@@ -273,6 +273,17 @@ WIN_SPARKLE_API int __cdecl win_sparkle_get_update_check_interval();
 */
 WIN_SPARKLE_API time_t __cdecl win_sparkle_get_last_check_time();
 
+/**
+Sets whether the updater should hide user interaction windows
+
+Default value is 0, indicating that the updater windows should be shown.
+Set to 1 to hide.
+
+@since 0.4
+*/
+
+WIN_SPARKLE_API void __cdecl win_sparkle_set_hide_updater_windows(int hide);
+
 /// Callback type for win_sparkle_error_callback()
 typedef void (__cdecl *win_sparkle_error_callback_t)();
 

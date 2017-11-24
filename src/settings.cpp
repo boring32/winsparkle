@@ -41,6 +41,7 @@ std::wstring Settings::ms_companyName;
 std::wstring Settings::ms_appName;
 std::wstring Settings::ms_appVersion;
 std::wstring Settings::ms_appBuildVersion;
+bool Settings::ms_hideUpdaterWindows = false;
 
 
 /*--------------------------------------------------------------------------*

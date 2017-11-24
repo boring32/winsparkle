@@ -75,6 +75,8 @@ WIN_SPARKLE_API void __cdecl win_sparkle_init()
         {
             if ( checkUpdates )
             {
+                //This UpdateChecker cannot be completely UI-less. Resseting the hide option.
+                Settings::SetHideWindows(0);
                 UpdateChecker *check = new UpdateChecker();
                 check->Start();
             }
@@ -250,6 +252,13 @@ WIN_SPARKLE_API time_t __cdecl win_sparkle_get_last_check_time()
     return DEFAULT_LAST_CHECK_TIME;
 }
 
+WIN_SPARKLE_API void __cdecl win_sparkle_set_hide_updater_windows(int hide) {
+    try {
+        Settings::SetHideWindows(hide==1);
+    }
+    CATCH_ALL_EXCEPTIONS
+}
+
 WIN_SPARKLE_API void __cdecl win_sparkle_set_error_callback(win_sparkle_error_callback_t callback)
 {
     try
@@ -312,6 +321,9 @@ WIN_SPARKLE_API void __cdecl win_sparkle_check_update_with_ui()
 {
     try
     {
+        //This UpdateChecker cannot be completely UI-less. Resseting the hide option.
+        Settings::SetHideWindows(0);
+
         // Initialize UI thread and show progress indicator.
         UI::ShowCheckingUpdates();
 
@@ -340,6 +352,8 @@ WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui()
 {
     try
     {
+        //This UpdateChecker cannot be completely UI-less. Resseting the hide option.
+        Settings::SetHideWindows(0);
         // Run the check in background. Only show UI if updates
         // are available.
         UpdateChecker *check = new UpdateChecker();
