@@ -63,6 +63,16 @@ public:
         return ms_appcastURL;
     }
 
+    static bool GetHideWindows() {
+        CriticalSectionLocker lock(ms_csVars);
+        return ms_hideUpdaterWindows;
+    }
+
+    static void SetHideWindows(bool hide) {
+        CriticalSectionLocker lock(ms_csVars);
+        ms_hideUpdaterWindows = hide;
+    }
+
     /// Return application name
     static std::wstring GetAppName()
     {
@@ -323,6 +333,7 @@ private:
     static std::wstring ms_appVersion;
     static std::wstring ms_appBuildVersion;
     static std::string  ms_DSAPubKey;
+    static bool         ms_hideUpdaterWindows;
 };
 
 } // namespace winsparkle

@@ -669,12 +669,14 @@ void UpdateDialog::OnRunInstaller(wxCommandEvent&)
 {
     if( !ApplicationController::IsReadyToShutdown() )
     {
-        wxMessageDialog dlg(this,
-                            wxString::Format(_("%s cannot be restarted."), Settings::GetAppName()),
-                            _("Software Update"),
-                            wxOK | wxOK_DEFAULT | wxICON_EXCLAMATION);
-        dlg.SetExtendedMessage(_("Make sure that you don't have any unsaved documents and try again."));
-        dlg.ShowModal();
+        if (Settings::GetHideWindows()) {
+            wxMessageDialog dlg(this,
+                wxString::Format(_("%s cannot be restarted."), Settings::GetAppName()),
+                _("Software Update"),
+                wxOK | wxOK_DEFAULT | wxICON_EXCLAMATION);
+            dlg.SetExtendedMessage(_("Make sure that you don't have any unsaved documents and try again."));
+            dlg.ShowModal();
+        }
         return;
     }
 
@@ -1315,7 +1317,12 @@ void App::ShowWindow()
     m_win->Freeze();
     if (!m_win->IsShown())
         CenterWindowOnHostApplication(m_win);
-    m_win->Show();
+    if (Settings::GetHideWindows()) {
+        m_win->Show(false);
+    }
+    else {
+        m_win->Show(true);
+    }
     m_win->Thaw();
     m_win->Raise();
 }
