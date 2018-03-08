@@ -1,3 +1,8 @@
+Version 0.6.1 Beta
+-------------
+
+- Added a new configuration that allows the user to hide the GUI windows when set with win_sparkle_set_hide_updater_windows. The option is only applicable when using win_sparkle_check_update_with_ui_and_install().
+
 
 Version 0.6.0
 -------------
